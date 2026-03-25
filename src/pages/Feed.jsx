@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Sidebar from "../components/Sidebar";
 import VideoCard from "../components/VideoCard";
 import Loader from "../components/Loader";
+import CategoryPills from "../components/CategoryPills";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
 const Feed = () => {
@@ -20,6 +21,11 @@ const Feed = () => {
         setSelectedCategory={setSelectedCategory}
       />
       <div className="flex-1 p-4 md:p-6 pb-24 md:pb-6">
+        <CategoryPills
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+
         <h2 className="text-white text-xl md:text-2xl font-bold mb-6">
           <span className="text-red-500">{selectedCategory}</span> Videos
         </h2>

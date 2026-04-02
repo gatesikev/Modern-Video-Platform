@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ setSidebarOpen, sidebarOpen }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
@@ -18,13 +18,23 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-[#0f0f0f] border-b border-[#272727]">
       <div className="flex items-center justify-between px-4 py-2">
-        
-        {/* Logo */}
+
+        {/* Left — Hamburger + Logo */}
         {!showSearch && (
-          <Link to="/" className="flex items-center gap-1">
-            <span className="text-red-600 text-3xl font-black">▶</span>
-            <span className="text-white text-xl font-bold">YouTube</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            {/* Hamburger */}
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="text-white text-xl p-2 rounded-full hover:bg-[#272727] transition-colors"
+            >
+              ☰
+            </button>
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-1">
+              <span className="text-red-600 text-2xl font-black">▶</span>
+              <span className="text-white text-lg font-bold hidden sm:block">YouTube</span>
+            </Link>
+          </div>
         )}
 
         {/* Desktop Search */}
@@ -46,7 +56,7 @@ const Navbar = () => {
           </div>
         </form>
 
-        {/* Mobile Search - Expanded */}
+        {/* Mobile Search Expanded */}
         {showSearch && (
           <form onSubmit={handleSearch} className="flex md:hidden items-center gap-2 flex-1 ml-2">
             <div className="flex w-full rounded-full overflow-hidden border border-[#303030] focus-within:border-blue-500">
@@ -77,7 +87,6 @@ const Navbar = () => {
 
         {/* Right Icons */}
         <div className="flex items-center gap-3">
-          {/* Mobile search toggle */}
           {!showSearch && (
             <button
               onClick={() => setShowSearch(true)}
